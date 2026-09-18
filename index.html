@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
-  <title>2026 大阪花火節 5日遊小工具</title>
+  <title>2026 大阪花火節 5日遊</title>
   
-  <!-- PWA Meta Tags -->
-  <meta name="theme-color" content="#1a1d24">
+  <!-- PWA & iOS App Icon 設定：桌面上會顯示這張合照 -->
+  <link rel="apple-touch-icon" href="photo.jpg">
+  <link rel="icon" type="image/jpeg" href="photo.jpg">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="大阪花火行">
+  <meta name="theme-color" content="#0f172a">
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -68,6 +70,41 @@
 
   <!-- 主內容分頁容器 -->
   <main class="max-w-md mx-auto p-4 space-y-4">
+
+    <!-- ================= 4 人專屬合照封面橫幅 (支援點擊更換/自動讀取 photo.jpg) ================= -->
+    <div class="relative overflow-hidden rounded-3xl border border-slate-800 shadow-xl bg-slate-900 group">
+      <img id="groupPhotoImg" 
+           src="photo.jpg" 
+           alt="大阪4人行合照" 
+           class="w-full h-48 object-cover object-center transition duration-500 group-hover:scale-105"
+           onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1545569341-9eb8b30979d9?q=80&w=1000&auto=format&fit=crop'; document.getElementById('photoUploadTip').classList.remove('hidden');" />
+      
+      <!-- 遮罩漸層 -->
+      <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
+      
+      <!-- 橫幅文字與標籤 -->
+      <div class="absolute bottom-3 left-3 right-3 flex justify-between items-end">
+        <div>
+          <div class="flex items-center gap-1.5 mb-1">
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-600 text-white shadow">4人組隊</span>
+            <span class="text-[11px] text-slate-300 font-medium">Ann · Rogen · Tintin · Patty</span>
+          </div>
+          <p class="text-xs font-bold text-white tracking-wide drop-shadow">淀川花火節特攻之旅 🎆</p>
+        </div>
+        
+        <!-- 手動換照片按鈕（方便在手機上臨時換圖） -->
+        <label for="localPhotoInput" class="cursor-pointer p-2 bg-black/60 hover:bg-black/80 backdrop-blur-md rounded-xl text-slate-200 border border-white/20 active:scale-95 transition flex items-center gap-1 text-[11px]">
+          <i data-lucide="camera" class="w-3.5 h-3.5 text-rose-400"></i>
+          <span>換照片</span>
+        </label>
+        <input type="file" id="localPhotoInput" accept="image/*" class="hidden" onchange="previewUserPhoto(event)" />
+      </div>
+
+      <!-- 若還沒放 photo.jpg 的溫馨提示 -->
+      <div id="photoUploadTip" class="hidden absolute top-2 right-2 bg-amber-500/90 text-slate-950 px-2 py-1 rounded-lg text-[10px] font-bold shadow">
+        提示：放一張 photo.jpg 在同目錄即可
+      </div>
+    </div>
 
     <!-- ================= 頁籤 1: 每日行程 ================= -->
     <section id="tab-itinerary" class="tab-content space-y-4">
@@ -305,7 +342,7 @@
   <div id="infoModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-sm w-full p-5 space-y-4 shadow-2xl text-xs text-slate-300 max-h-[85vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-        <h3 class="font-bold text-white text-sm">💡 部署與離線安裝指南</h3>
+        <h3 class="font-bold text-white text-sm">💡 iPhone PWA 安裝指南</h3>
         <button onclick="toggleModal('infoModal')" class="text-slate-400 hover:text-white">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
@@ -313,32 +350,25 @@
 
       <div class="space-y-3">
         <div>
-          <h4 class="font-bold text-emerald-400 mb-1">1. 如何在手機上當作 App (PWA) 使用？</h4>
+          <h4 class="font-bold text-emerald-400 mb-1">📱 如何讓桌面圖示變成我們的合照？</h4>
           <p class="text-slate-400 leading-relaxed">
-            • <strong>iPhone (Safari)</strong>：點擊瀏覽器下方「分享」按鈕 ➔ 滑動選擇<strong>「加入主畫面」</strong>。<br>
-            • <strong>Android (Chrome)</strong>：點擊右上角「三個點」 ➔ 選擇<strong>「安裝應用程式」</strong>或<strong>「加到主螢幕」</strong>。
+            1. 將合照更名為 <code>photo.jpg</code>，放在與 <code>index.html</code> 相同的資料夾上傳。<br>
+            2. 用 iPhone Safari 打開你的網頁。<br>
+            3. 點擊瀏覽器下方<strong>「分享」圖示</strong>（箭頭朝上的方塊）。<br>
+            4. 往下滑動點選<strong>「加入主畫面」</strong> ➔ 點右上角<strong>「新增」</strong>即可！
           </p>
         </div>
 
         <div>
-          <h4 class="font-bold text-sky-400 mb-1">2. 免費一鍵 Hosting 推薦</h4>
+          <h4 class="font-bold text-sky-400 mb-1">🚀 推薦上線方式（最簡單快速）</h4>
           <p class="text-slate-400 leading-relaxed">
-            • 將代碼存為 <code>index.html</code>。<br>
-            • <strong>Vercel (最推)</strong>：直接把檔案拖進 <a href="https://vercel.com" target="_blank" class="text-sky-400 underline">Vercel.com</a> 或綁定 GitHub Repo，30秒獲得 https 網址。<br>
-            • <strong>GitHub Pages</strong>：建立 GitHub Repository ➔ 上傳 <code>index.html</code> ➔ Settings ➔ Pages ➔ 選擇 Deploy from Branch (main/root)。
-          </p>
-        </div>
-
-        <div>
-          <h4 class="font-bold text-rose-400 mb-1">3. 關於檔名</h4>
-          <p class="text-slate-400 leading-relaxed">
-            如欲上傳至網站 Hosting，首頁必須維持名為 <code>index.html</code>，建議新建專屬資料夾存放。
+            打開 <a href="https://vercel.com" target="_blank" class="text-sky-400 underline">Vercel.com</a> 或 <a href="https://app.netlify.com/drop" target="_blank" class="text-sky-400 underline">Netlify Drop</a>，直接把整個資料夾（包含 <code>index.html</code> 與 <code>photo.jpg</code>）拖曳進去，不到 30 秒就獲得一個 https 專屬網址，4 個人都能在手機直接打開安裝！
           </p>
         </div>
       </div>
 
       <button onclick="toggleModal('infoModal')" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl font-semibold">
-        我瞭解了
+        我知道了
       </button>
     </div>
   </div>
@@ -540,7 +570,7 @@
       }
     };
 
-    // 初始記帳數據 (可自本機儲存取出)
+    // 初始記帳數據 (自動持久化保存)
     let expenses = JSON.parse(localStorage.getItem('osaka_expenses_2026') || 'null');
     if (!expenses) {
       expenses = [
@@ -552,12 +582,35 @@
 
     let currentDay = 1;
 
-    // 畫面加載初始化
+    // 頁面加載完成後執行
     document.addEventListener("DOMContentLoaded", () => {
+      // 檢查 localStorage 是否有手動上傳儲存的照片
+      const savedPhoto = localStorage.getItem('osaka_group_photo');
+      if (savedPhoto) {
+        document.getElementById('groupPhotoImg').src = savedPhoto;
+      }
       renderDay(currentDay);
       renderExpenses();
       lucide.createIcons();
     });
+
+    // 支援直接在手機上選擇相簿照片替換
+    function previewUserPhoto(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const base64Img = e.target.result;
+          document.getElementById('groupPhotoImg').src = base64Img;
+          try {
+            localStorage.setItem('osaka_group_photo', base64Img);
+          } catch(err) {
+            console.log("照片檔案較大，暫無法完全寫入 LocalStorage，但當前頁面已可預覽");
+          }
+        }
+        reader.readAsDataURL(file);
+      }
+    }
 
     // 切換天數
     function switchDay(dayNum) {
@@ -590,16 +643,13 @@
       data.items.forEach(item => {
         let borderClass = "border-slate-800 hover:border-slate-700";
         let badge = `<span class="bg-indigo-950 text-indigo-300 border border-indigo-700/40 text-[10px] px-2 py-0.5 rounded-full">景點</span>`;
-        let iconName = "compass";
 
         if (item.type === 'food') {
           borderClass = "border-amber-900/40 bg-amber-950/10";
           badge = `<span class="bg-amber-950 text-amber-300 border border-amber-700/40 text-[10px] px-2 py-0.5 rounded-full">美食</span>`;
-          iconName = "utensils";
         } else if (item.type === 'transport') {
           borderClass = "border-sky-900/40 bg-sky-950/10";
           badge = `<span class="bg-sky-950 text-sky-300 border border-sky-700/40 text-[10px] px-2 py-0.5 rounded-full">交通</span>`;
-          iconName = "car";
         }
 
         const navUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(item.navQuery)}`;
