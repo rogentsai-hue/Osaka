@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+  <title>2026 大阪花火節 5日遊小工具</title>
+  
+  <!-- PWA Meta Tags -->
+  <meta name="theme-color" content="#1a1d24">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="大阪花火行">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#e11d48',
+            darkbg: '#0f172a',
+            cardbg: '#1e293b',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen pb-28">
+
+  <!-- 頂部導航列 -->
+  <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-4 py-3 flex items-center justify-between shadow-lg">
+    <div class="flex items-center space-x-2">
+      <i data-lucide="sparkles" class="w-6 h-6 text-rose-500 animate-pulse"></i>
+      <div>
+        <h1 class="text-base font-bold tracking-wide text-white">大阪花火節 5D4N</h1>
+        <p class="text-xs text-slate-400">2026.10.15 - 10.19 ｜ 4人同行</p>
+      </div>
+    </div>
+    <div class="flex items-center space-x-2">
+      <button onclick="toggleModal('infoModal')" class="p-2 bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-300 rounded-full transition" title="專案部署說明">
+        <i data-lucide="help-circle" class="w-5 h-5"></i>
+      </button>
+      <span class="px-2.5 py-1 bg-rose-500/20 border border-rose-500/40 text-rose-300 rounded-full text-xs font-semibold">
+        なにわ淀川
+      </span>
+    </div>
+  </header>
+
+  <!-- 主內容分頁容器 -->
+  <main class="max-w-md mx-auto p-4 space-y-4">
+
+    <!-- ================= 頁籤 1: 每日行程 ================= -->
+    <section id="tab-itinerary" class="tab-content space-y-4">
+      <!-- 天數橫向滾動選擇器 -->
+      <div class="flex space-x-2 overflow-x-auto hide-scrollbar py-1">
+        <button onclick="switchDay(1)" id="dayBtn-1" class="day-pill px-4 py-2 rounded-2xl text-xs font-semibold bg-rose-600 text-white shadow-md flex-shrink-0 transition">
+          10/15 (四) D1
+        </button>
+        <button onclick="switchDay(2)" id="dayBtn-2" class="day-pill px-4 py-2 rounded-2xl text-xs font-semibold bg-slate-800 text-slate-400 flex-shrink-0 transition">
+          10/16 (五) D2
+        </button>
+        <button onclick="switchDay(3)" id="dayBtn-3" class="day-pill px-4 py-2 rounded-2xl text-xs font-semibold bg-slate-800 text-slate-400 flex-shrink-0 transition">
+          10/17 (六) D3 🎆
+        </button>
+        <button onclick="switchDay(4)" id="dayBtn-4" class="day-pill px-4 py-2 rounded-2xl text-xs font-semibold bg-slate-800 text-slate-400 flex-shrink-0 transition">
+          10/18 (日) D4
+        </button>
+        <button onclick="switchDay(5)" id="dayBtn-5" class="day-pill px-4 py-2 rounded-2xl text-xs font-semibold bg-slate-800 text-slate-400 flex-shrink-0 transition">
+          10/19 (一) D5
+        </button>
+      </div>
+
+      <!-- 天氣小卡 (動態切換) -->
+      <div id="weatherCard" class="bg-gradient-to-r from-sky-900/60 via-blue-900/40 to-slate-900 border border-sky-700/30 rounded-2xl p-3.5 flex items-center justify-between shadow">
+        <div class="flex items-center space-x-3">
+          <div id="weatherIconContainer" class="p-2.5 bg-sky-500/20 rounded-xl text-sky-400">
+            <i data-lucide="sun" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <div class="text-xs text-sky-300 font-medium" id="weatherLocation">大阪市區</div>
+            <div class="text-lg font-bold text-white flex items-center gap-2">
+              <span id="weatherTemp">21°C</span>
+              <span id="weatherStatus" class="text-xs font-normal text-slate-300">秋高氣爽 微風</span>
+            </div>
+          </div>
+        </div>
+        <div class="text-right text-[11px] text-slate-400 space-y-0.5">
+          <div>降雨機率 <span id="weatherRain" class="text-sky-300 font-semibold">10%</span></div>
+          <div>早晚溫差大 備薄外套</div>
+        </div>
+      </div>
+
+      <!-- 行程內容清單容器 -->
+      <div id="itineraryCardsContainer" class="space-y-4">
+        <!-- 由 JS 動態注入卡片 -->
+      </div>
+    </section>
+
+    <!-- ================= 頁籤 2: 航班與住宿 ================= -->
+    <section id="tab-logistics" class="tab-content hidden space-y-4">
+      <!-- 航班資訊 -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow">
+        <h2 class="text-sm font-bold text-white flex items-center gap-2 mb-3">
+          <i data-lucide="plane" class="w-4 h-4 text-sky-400"></i> 成員航班時間 (10/15 去 - 10/19 回)
+        </h2>
+        <div class="space-y-3 text-xs">
+          <!-- Ann & Tintin -->
+          <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700/50">
+            <div class="flex justify-between items-center mb-1.5 font-semibold text-sky-300">
+              <span>Ann & Tintin ｜ 星宇航空 (STARLUX)</span>
+              <span class="text-[10px] bg-sky-950 px-2 py-0.5 rounded text-sky-200">2人同行</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2 text-slate-300">
+              <div>
+                <p class="text-slate-400 text-[10px]">去程 10/15 (四)</p>
+                <p class="font-bold text-slate-100">JX822 10:15 - 14:00</p>
+                <p class="text-[10px] text-slate-400">抵達關西 KIX T1</p>
+              </div>
+              <div>
+                <p class="text-slate-400 text-[10px]">回程 10/19 (一)</p>
+                <p class="font-bold text-slate-100">JX823 15:10 - 17:05</p>
+                <p class="text-[10px] text-slate-400">需提早 2.5 小時至機場</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Rogen -->
+          <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700/50">
+            <div class="flex justify-between items-center mb-1.5 font-semibold text-emerald-300">
+              <span>Rogen ｜ 深圳航空 (Shenzhen Air)</span>
+              <span class="text-[10px] bg-emerald-950 px-2 py-0.5 rounded text-emerald-200">1人</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2 text-slate-300">
+              <div>
+                <p class="text-slate-400 text-[10px]">去程 10/15 (四)</p>
+                <p class="font-bold text-slate-100">ZH661 09:20 - 14:15</p>
+                <p class="text-[10px] text-slate-400">抵達與星宇僅差 15 分鐘！</p>
+              </div>
+              <div>
+                <p class="text-slate-400 text-[10px]">回程 10/19 (一)</p>
+                <p class="font-bold text-slate-100">ZH662 15:15 - 18:35</p>
+                <p class="text-[10px] text-slate-400">可與 Ann/Tintin 一同前往機場</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Patty -->
+          <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700/50 flex justify-between items-center">
+            <div>
+              <span class="font-semibold text-amber-300">Patty</span>
+              <p class="text-[10px] text-slate-400">本來就在大阪，預計飯店或南海難波站會合</p>
+            </div>
+            <span class="text-[10px] bg-amber-950 text-amber-200 px-2 py-1 rounded">在地等候</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 住宿資訊 -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow">
+        <h2 class="text-sm font-bold text-white flex items-center gap-2 mb-2">
+          <i data-lucide="hotel" class="w-4 h-4 text-rose-400"></i> 飯店資訊 (連住 4 晚)
+        </h2>
+        <div class="bg-slate-800/80 p-3.5 rounded-xl border border-slate-700/50 space-y-2 text-xs">
+          <div>
+            <p class="font-bold text-sm text-white">WELLSTAY Osaka Namba Apartmenthotel-Cocochill</p>
+            <p class="text-slate-400 text-[11px]">ウェルステイ ココチル</p>
+          </div>
+          <div class="text-slate-300 space-y-1 text-[11px]">
+            <p><span class="text-slate-500">地址：</span>3 Chome-2-14 Motomachi, Naniwa Ward, Osaka, 556-0016 日本</p>
+            <p><span class="text-slate-500">Plus Code：</span><span class="font-mono text-rose-300 bg-rose-950/60 px-1.5 py-0.5 rounded">MF6W+79 大阪市 日本大阪府</span></p>
+            <p><span class="text-slate-500">交通：</span>近南海難波站、大國町站，配備獨立衛浴與廚房公寓型設施。</p>
+          </div>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=3+Chome-2-14+Motomachi,+Naniwa+Ward,+Osaka,+556-0016" 
+             target="_blank" 
+             class="inline-flex items-center justify-center w-full gap-2 py-2 bg-rose-600 hover:bg-rose-500 active:scale-95 rounded-xl text-white font-semibold transition mt-2">
+            <i data-lucide="navigation-2" class="w-4 h-4"></i> 一鍵導航至飯店
+          </a>
+        </div>
+      </div>
+
+      <!-- 緊急聯絡電話 -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow">
+        <h2 class="text-sm font-bold text-white flex items-center gap-2 mb-2">
+          <i data-lucide="phone-call" class="w-4 h-4 text-red-400"></i> 日本緊急求助專線
+        </h2>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <a href="tel:110" class="flex items-center justify-between p-2.5 bg-slate-800/90 rounded-xl border border-slate-700 hover:border-red-500 transition">
+            <span class="text-slate-300">警察局報案</span>
+            <span class="font-bold text-red-400 text-sm">110</span>
+          </a>
+          <a href="tel:119" class="flex items-center justify-between p-2.5 bg-slate-800/90 rounded-xl border border-slate-700 hover:border-red-500 transition">
+            <span class="text-slate-300">火警 / 救護車</span>
+            <span class="font-bold text-red-400 text-sm">119</span>
+          </a>
+          <a href="tel:+81662278623" class="col-span-2 flex items-center justify-between p-2.5 bg-slate-800/90 rounded-xl border border-slate-700">
+            <div>
+              <div class="text-slate-300">台北駐大阪經濟文化辦事處</div>
+              <div class="text-[10px] text-slate-500">緊急急難救助專線</div>
+            </div>
+            <span class="font-bold text-amber-400 text-xs">06-6227-8623</span>
+          </a>
+          <a href="tel:#7119" class="col-span-2 flex items-center justify-between p-2 bg-slate-800/50 rounded-xl border border-slate-800 text-[11px] text-slate-400">
+            <span>夜間突發疾病諮詢 (急病救急)</span>
+            <span class="font-mono text-slate-200">#7119</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 頁籤 3: 記帳/預算表 ================= -->
+    <section id="tab-budget" class="tab-content hidden space-y-4">
+      <!-- 預算總覽小卡 -->
+      <div class="bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 rounded-2xl p-4 shadow">
+        <div class="text-xs text-slate-400 mb-1">公積金 / 已記帳總開銷 (4人)</div>
+        <div class="text-2xl font-black text-emerald-400 font-mono tracking-tight" id="totalExpenseDisplay">¥0</div>
+        <div class="text-xs text-slate-400 mt-2 flex justify-between border-t border-slate-700/60 pt-2">
+          <span>人均分攤預估</span>
+          <span class="font-mono text-slate-200 font-bold" id="perPersonDisplay">¥0</span>
+        </div>
+      </div>
+
+      <!-- 新增記帳表單 -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow space-y-3 text-xs">
+        <h3 class="font-bold text-white flex items-center gap-1.5">
+          <i data-lucide="plus-circle" class="w-4 h-4 text-emerald-400"></i> 新增支出項目
+        </h3>
+        <div class="grid grid-cols-2 gap-2">
+          <input type="text" id="expenseItem" placeholder="項目 (如：午餐)" class="bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500">
+          <input type="number" id="expenseAmount" placeholder="金額 (JPY ¥)" class="bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500">
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <select id="expensePayer" class="bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-slate-200">
+            <option value="公積金/未定">公積金付</option>
+            <option value="Rogen">Rogen 先墊</option>
+            <option value="Ann">Ann 先墊</option>
+            <option value="Tintin">Tintin 先墊</option>
+            <option value="Patty">Patty 先墊</option>
+          </select>
+          <select id="expenseCategory" class="bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-slate-200">
+            <option value="門票">門票/娛樂</option>
+            <option value="餐飲">美食/餐飲</option>
+            <option value="交通">交通/租車</option>
+            <option value="購物">採買/伴手禮</option>
+            <option value="其他">其他雜項</option>
+          </select>
+        </div>
+        <button onclick="addExpense()" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 active:scale-95 rounded-xl font-bold text-white transition">
+          記入帳本
+        </button>
+      </div>
+
+      <!-- 記帳明細列表 -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow space-y-2">
+        <div class="flex justify-between items-center mb-1">
+          <h3 class="text-xs font-bold text-slate-300">開銷明細</h3>
+          <button onclick="clearExpenses()" class="text-[11px] text-slate-500 hover:text-red-400">清空明細</button>
+        </div>
+        <div id="expenseList" class="space-y-2 max-h-72 overflow-y-auto pr-1">
+          <!-- JS 動態生成明細 -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 底部固定 Tab Bar 導航 -->
+  <nav class="fixed bottom-0 left-0 right-0 z-40 bg-slate-900/95 backdrop-blur-lg border-t border-slate-800 px-6 py-2.5">
+    <div class="max-w-md mx-auto flex justify-around items-center">
+      <button onclick="switchTab('itinerary')" id="navBtn-itinerary" class="flex flex-col items-center gap-1 text-rose-500 font-semibold transition">
+        <i data-lucide="calendar" class="w-5 h-5"></i>
+        <span class="text-[10px]">每日行程</span>
+      </button>
+      <button onclick="switchTab('logistics')" id="navBtn-logistics" class="flex flex-col items-center gap-1 text-slate-400 hover:text-slate-200 transition">
+        <i data-lucide="plane-takeoff" class="w-5 h-5"></i>
+        <span class="text-[10px]">航班住宿</span>
+      </button>
+      <button onclick="switchTab('budget')" id="navBtn-budget" class="flex flex-col items-center gap-1 text-slate-400 hover:text-slate-200 transition">
+        <i data-lucide="wallet" class="w-5 h-5"></i>
+        <span class="text-[10px]">記帳均分</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 彈出視窗：專案部署與說明 Modal -->
+  <div id="infoModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-sm w-full p-5 space-y-4 shadow-2xl text-xs text-slate-300 max-h-[85vh] overflow-y-auto">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+        <h3 class="font-bold text-white text-sm">💡 部署與離線安裝指南</h3>
+        <button onclick="toggleModal('infoModal')" class="text-slate-400 hover:text-white">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="space-y-3">
+        <div>
+          <h4 class="font-bold text-emerald-400 mb-1">1. 如何在手機上當作 App (PWA) 使用？</h4>
+          <p class="text-slate-400 leading-relaxed">
+            • <strong>iPhone (Safari)</strong>：點擊瀏覽器下方「分享」按鈕 ➔ 滑動選擇<strong>「加入主畫面」</strong>。<br>
+            • <strong>Android (Chrome)</strong>：點擊右上角「三個點」 ➔ 選擇<strong>「安裝應用程式」</strong>或<strong>「加到主螢幕」</strong>。
+          </p>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-sky-400 mb-1">2. 免費一鍵 Hosting 推薦</h4>
+          <p class="text-slate-400 leading-relaxed">
+            • 將代碼存為 <code>index.html</code>。<br>
+            • <strong>Vercel (最推)</strong>：直接把檔案拖進 <a href="https://vercel.com" target="_blank" class="text-sky-400 underline">Vercel.com</a> 或綁定 GitHub Repo，30秒獲得 https 網址。<br>
+            • <strong>GitHub Pages</strong>：建立 GitHub Repository ➔ 上傳 <code>index.html</code> ➔ Settings ➔ Pages ➔ 選擇 Deploy from Branch (main/root)。
+          </p>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-rose-400 mb-1">3. 關於檔名</h4>
+          <p class="text-slate-400 leading-relaxed">
+            如欲上傳至網站 Hosting，首頁必須維持名為 <code>index.html</code>，建議新建專屬資料夾存放。
+          </p>
+        </div>
+      </div>
+
+      <button onclick="toggleModal('infoModal')" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl font-semibold">
+        我瞭解了
+      </button>
+    </div>
+  </div>
+
+  <!-- JavaScript 邏輯程式庫 -->
+  <script>
+    // 每日行程與天氣數據庫
+    const itineraryData = {
+      1: {
+        date: "2026/10/15 (週四)",
+        weather: { temp: "22°C", text: "多雲時晴", rain: "15%", icon: "sun" },
+        items: [
+          {
+            type: "transport",
+            time: "14:15",
+            title: "關西國際機場 (KIX) 降落＆全員集合",
+            address: "Kansai International Airport (KIX)",
+            navQuery: "Kansai International Airport",
+            story: "Ann/Tintin (JX822 14:00抵達) 與 Rogen (ZH661 14:15抵達) 時間僅差15分鐘！出關後於第一航廈接機大廳會合，搭乘南海電鐵特急 Rapi:t 直達難波。",
+            tags: { reserve: "KIX ➔ 難波 Rapi:t 特急券" }
+          },
+          {
+            type: "spot",
+            time: "16:00",
+            title: "飯店 Check-in: WELLSTAY Cocochill",
+            address: "3 Chome-2-14 Motomachi, Naniwa Ward, Osaka",
+            navQuery: "3 Chome-2-14 Motomachi, Naniwa Ward, Osaka, 556-0016",
+            story: "公寓式飯店，與在地等待的 Patty 正式四人合體！放行李、整裝，徒步前往心齋橋商圈探索。",
+            tags: { reserve: "MF6W+79 大阪市 日本大阪府" }
+          },
+          {
+            type: "spot",
+            time: "17:30",
+            title: "茶館 wad (wad omotenashi cafe)",
+            address: "日本〒542-0081 Osaka, Chuo Ward, Minamisenba, 4 Chome−9−3 東新ビル 2F",
+            navQuery: "Osaka, Chuo Ward, Minamisenba, 4 Chome−9−3 東新ビル 2F",
+            story: "隱身於南船場大樓2樓的極致美學茶館。店內主打日本傳統金繼工藝（金継ぎ）與精緻陶藝器皿。在此品嚐第一道正統宇治抹茶，洗滌飛行奔波疲累。",
+            tags: {
+              food: "宇治濃抹茶、冷萃焙茶",
+              menu: "季節和菓子、現烤日式烤糰子 (お団子)",
+              souvenir: "職人手作侘寂陶器杯、自家烘焙原葉茶包"
+            }
+          },
+          {
+            type: "food",
+            time: "19:30",
+            title: "心齋橋・道頓堀 漫步與歡迎晚餐",
+            address: "道頓堀, Chuo Ward, Osaka",
+            navQuery: "Dotonbori, Osaka",
+            story: "夜間沿著道頓堀河畔散步拍照，感受大阪繁華夜景。可品嚐道地大阪燒或章魚燒當宵夜。",
+            tags: { food: "元祖元祿壽司、串炸達摩、章魚燒" }
+          }
+        ]
+      },
+      2: {
+        date: "2026/10/16 (週五)",
+        weather: { temp: "21°C", text: "秋高氣爽", rain: "0%", icon: "sun" },
+        items: [
+          {
+            type: "spot",
+            time: "10:30",
+            title: "大阪城公園 / 中之島水上文青散策",
+            address: "1-1 Osakajo, Chuo Ward, Osaka",
+            navQuery: "Osaka Castle, Osaka",
+            story: "享受10月中旬大阪的秋意，中之島有許多設計咖啡廳與建築大師安藤忠雄打造的童書森林，適合悠閒散步拍照。",
+            tags: { menu: "中之島露天水岸咖啡、法式可麗露" }
+          },
+          {
+            type: "food",
+            time: "17:30",
+            title: "超人氣排隊居酒屋：Sushi Sakaba Sashisu (難波Walk店)",
+            address: "日本〒542-0074 Osaka, Chuo Ward, Sennichimae, 1 Chome 虹の街5-11 なんばウォーク3番街南通り",
+            navQuery: "Sushi Sakaba Sashisu Namba Walk",
+            story: "大阪目前最火紅的現代潮流壽司居酒屋！以超高 CP 值與豪邁浮誇的海鮮視覺聞名，建議 17:00 前往候位避免久候。",
+            tags: {
+              food: "溢れ鮪魚鐵火卷 (トロ鉄火巻)、エビ7 (7隻甜蝦握壽司)",
+              menu: "炙燒鮭魚腹握壽司、海老紫蘇天婦羅、角High"
+            }
+          },
+          {
+            type: "spot",
+            time: "20:30",
+            title: "難波地下街 & Bic Camera / 唐吉訶德 採買",
+            address: "Sennichimae, Chuo Ward, Osaka",
+            navQuery: "Bic Camera Namba, Osaka",
+            story: "晚餐後就近於千日前、難波地下街與藥妝店採買零食補給，為明天的花火大會做準備（飲料、濕紙巾、野餐小點）。",
+            tags: { souvenir: "日系藥妝、保溫杯、限定防蚊噴霧" }
+          }
+        ]
+      },
+      3: {
+        date: "2026/10/17 (週六) 🎆 重頭戲花火節",
+        weather: { temp: "20°C / 夜間16°C", text: "夜間微風 (超適合煙火)", rain: "5%", icon: "sparkles" },
+        items: [
+          {
+            type: "spot",
+            time: "11:00",
+            title: "選品採買：育てるタオル (阪急うめだ本店 8F)",
+            address: "日本〒530-8350 Osaka, Kita Ward, Kakudacho, 8−7 阪急うめだ本店 8F",
+            navQuery: "Hankyu Umeda Main Store, Osaka",
+            story: "日本超人氣「越洗越蓬鬆柔軟」的頂級專櫃毛巾品牌。經典圓筒紙盒包裝極具質感，自用送禮第一首選。",
+            tags: {
+              souvenir: "經典 feel 系列（附圓筒禮盒）、MARQUE 奢華頂級毛巾",
+              reserve: "持護照至 B1 服務台領取 95 折外國人優惠券"
+            }
+          },
+          {
+            type: "spot",
+            time: "13:00",
+            title: "逛街補給：LE TALON Osakaten (LUCUA 3F)",
+            address: "日本〒530-0001 Osaka, Kita Ward, Umeda, 3 Chome−1−3 ルクア 3F",
+            navQuery: "LE TALON Osaka Lucua, Osaka",
+            story: "【朋友指定必去】日本都會女性最愛鞋履品牌！版型專為亞洲人腳型設計，主打低跟、極度舒適又具備俐落法式時尚感，從梅田阪急步行3分鐘直達 LUCUA 3F。",
+            tags: {
+              souvenir: "經典軟皮革樂福鞋、極軟底瑪莉珍鞋",
+              menu: "必試：GRISE 系列防潑水晴雨兩用平底鞋",
+              reserve: "LUCUA 全館可辦理外國人退稅 (5.5%手續費)"
+            }
+          },
+          {
+            type: "transport",
+            time: "16:00",
+            title: "提早前往淀川會場 (避開百萬人潮管制)",
+            address: "淀川河川敷 十三會場",
+            navQuery: "Juso Station, Osaka",
+            story: "搭乘阪急電鐵前往『十三站』或JR『塚本站』。花火節人潮達數十萬，下午 16:30 前務必入場找好 e+シート 專屬座席！",
+            tags: { reserve: "重要：備妥飲用水、薄外套防風、行動電源" }
+          },
+          {
+            type: "spot",
+            time: "19:00 - 20:00",
+            title: "第38回 なにわ淀川花火大会 (開演！)",
+            address: "淀川河川敷 十三会場 (e+エリア)",
+            navQuery: "Yodogawa Riverside Park, Osaka",
+            story: "【本次旅行核心】大阪秋夜最震撼花火饗宴！在十三側專用座席近距離觀賞水上水中花火連發與巨型煙火瀑布，磅礡壯觀！",
+            tags: {
+              reserve: "票券：e+シート 4枚 (總金額 ¥31,320 已付款完成)",
+              menu: "散場秘笈：向西步行往『塚本站』或步行至『西中島南方站』避開十三站恐怖管制"
+            }
+          }
+        ]
+      },
+      4: {
+        date: "2026/10/18 (週日)",
+        weather: { temp: "22°C", text: "晴朗舒適", rain: "0%", icon: "sun" },
+        items: [
+          {
+            type: "spot",
+            time: "10:30",
+            title: "黑門市場或木津卸賣市場 (在地海鮮早午餐)",
+            address: "2 Chome-4-1 Nipponbashi, Chuo Ward, Osaka",
+            navQuery: "Kuromon Ichiba Market, Osaka",
+            story: "距離飯店極近，早晨品嚐現剖海膽、神戶和牛串燒與新鮮黑鮪魚大腹刺身，補充前晚看花火消耗的精力。",
+            tags: { food: "炭烤活扇貝、現切黑鮪魚握壽司、草莓大福" }
+          },
+          {
+            type: "spot",
+            time: "14:00",
+            title: "橘子街 (Orange Street / 堀江) 潮流古著家飾巡禮",
+            address: "Minamihorie, Nishi Ward, Osaka",
+            navQuery: "Orange Street Osaka, Minamihorie",
+            story: "大阪文青潮流核心聚集地，滿佈獨立設計師小店、日系服飾、精品咖啡館與家飾選品店，步調愜意。",
+            tags: { souvenir: "日系香氛道具、選品生活雜貨、潮牌T恤" }
+          },
+          {
+            type: "food",
+            time: "18:30",
+            title: "心滿意足燒肉慶功夜 (國產黑毛和牛)",
+            address: "Namba, Osaka",
+            navQuery: "Yakiniku Namba, Osaka",
+            story: "4人共同舉杯慶祝花火節圓滿成功！享受油花分布均勻的炭火燒肉與盛岡冷麵。",
+            tags: { menu: "蔥花鹽烤特上牛舌、橫膈膜、生牛肉拌生蛋黃" }
+          }
+        ]
+      },
+      5: {
+        date: "2026/10/19 (週一) 返程平安歸賦",
+        weather: { temp: "20°C", text: "多雲時晴", rain: "10%", icon: "cloud" },
+        items: [
+          {
+            type: "spot",
+            time: "10:00",
+            title: "飯店退房 & 難波高島屋採買最後伴手禮",
+            address: "WELLSTAY Cocochill ➔ 難波高島屋",
+            navQuery: "Takashimaya Namba, Osaka",
+            story: "退房後行李寄放或推至南海難波站寄存。在高島屋地下街（B1）採買知名甜點伴手禮，與在地好友 Patty 擁抱道別！",
+            tags: { souvenir: "Bâton d'or 高級版 Pocky、福砂屋長崎蛋糕、仙貝" }
+          },
+          {
+            type: "transport",
+            time: "12:30",
+            title: "搭乘南海 Rapi:t 前往關西機場 (KIX)",
+            address: "Nankai Namba Station",
+            navQuery: "Nankai Namba Station",
+            story: "3人一同前往機場：Ann & Tintin (星宇 JX823 15:10 起飛)、Rogen (深航 ZH662 15:15 起飛)。時間幾乎完全同步，提前 2.5 小時抵達辦理退稅手續。",
+            tags: { reserve: "提醒：入關後免稅店採買 Royce生巧克力、白色戀人" }
+          }
+        ]
+      }
+    };
+
+    // 初始記帳數據 (可自本機儲存取出)
+    let expenses = JSON.parse(localStorage.getItem('osaka_expenses_2026') || 'null');
+    if (!expenses) {
+      expenses = [
+        { id: 1, item: "淀川花火 e+ 4人座票", amount: 31320, payer: "公積金/未定", cat: "門票" },
+        { id: 2, item: "大阪公寓住宿預付款", amount: 64000, payer: "公積金/未定", cat: "其他" }
+      ];
+      saveExpenses();
+    }
+
+    let currentDay = 1;
+
+    // 畫面加載初始化
+    document.addEventListener("DOMContentLoaded", () => {
+      renderDay(currentDay);
+      renderExpenses();
+      lucide.createIcons();
+    });
+
+    // 切換天數
+    function switchDay(dayNum) {
+      currentDay = dayNum;
+      document.querySelectorAll('.day-pill').forEach((btn, idx) => {
+        if (idx + 1 === dayNum) {
+          btn.className = "day-pill px-4 py-2 rounded-2xl text-xs font-semibold bg-rose-600 text-white shadow-md flex-shrink-0 transition";
+        } else {
+          btn.className = "day-pill px-4 py-2 rounded-2xl text-xs font-semibold bg-slate-800 text-slate-400 flex-shrink-0 transition";
+        }
+      });
+      renderDay(dayNum);
+      lucide.createIcons();
+    }
+
+    // 渲染指定天數行程
+    function renderDay(day) {
+      const data = itineraryData[day];
+      
+      // 更新天氣
+      document.getElementById('weatherLocation').innerText = `大阪市區 ｜ ${data.date}`;
+      document.getElementById('weatherTemp').innerText = data.weather.temp;
+      document.getElementById('weatherStatus').innerText = data.weather.text;
+      document.getElementById('weatherRain').innerText = data.weather.rain;
+
+      // 更新卡片清單
+      const container = document.getElementById('itineraryCardsContainer');
+      container.innerHTML = "";
+
+      data.items.forEach(item => {
+        let borderClass = "border-slate-800 hover:border-slate-700";
+        let badge = `<span class="bg-indigo-950 text-indigo-300 border border-indigo-700/40 text-[10px] px-2 py-0.5 rounded-full">景點</span>`;
+        let iconName = "compass";
+
+        if (item.type === 'food') {
+          borderClass = "border-amber-900/40 bg-amber-950/10";
+          badge = `<span class="bg-amber-950 text-amber-300 border border-amber-700/40 text-[10px] px-2 py-0.5 rounded-full">美食</span>`;
+          iconName = "utensils";
+        } else if (item.type === 'transport') {
+          borderClass = "border-sky-900/40 bg-sky-950/10";
+          badge = `<span class="bg-sky-950 text-sky-300 border border-sky-700/40 text-[10px] px-2 py-0.5 rounded-full">交通</span>`;
+          iconName = "car";
+        }
+
+        const navUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(item.navQuery)}`;
+
+        let tagsHtml = "";
+        if (item.tags) {
+          if (item.tags.food) {
+            tagsHtml += `<div class="text-[11px]"><span class="font-bold text-amber-400">🔥 必吃美食：</span><span class="text-slate-200 font-semibold">${item.tags.food}</span></div>`;
+          }
+          if (item.tags.menu) {
+            tagsHtml += `<div class="text-[11px]"><span class="font-bold text-rose-400">🍴 推薦必點：</span><span class="text-slate-200">${item.tags.menu}</span></div>`;
+          }
+          if (item.tags.souvenir) {
+            tagsHtml += `<div class="text-[11px]"><span class="font-bold text-purple-400">🎁 必買伴手禮：</span><span class="text-slate-200 font-semibold">${item.tags.souvenir}</span></div>`;
+          }
+          if (item.tags.reserve) {
+            tagsHtml += `<div class="text-[11px] bg-slate-900/90 p-2 rounded-lg border border-slate-700/60 text-slate-300"><span class="font-bold text-sky-400">📌 重要備忘/預約：</span>${item.tags.reserve}</div>`;
+          }
+        }
+
+        const card = `
+          <div class="bg-slate-900 border ${borderClass} rounded-2xl p-4 shadow-sm space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-2">
+                <span class="text-xs font-mono text-slate-400 font-bold">${item.time}</span>
+                ${badge}
+              </div>
+              <a href="${navUrl}" target="_blank" class="inline-flex items-center gap-1 px-3 py-1 bg-rose-600 hover:bg-rose-500 active:scale-95 text-white rounded-xl text-xs font-semibold shadow transition">
+                <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
+                <span>導航</span>
+              </a>
+            </div>
+
+            <div>
+              <h3 class="font-bold text-white text-sm tracking-wide">${item.title}</h3>
+              <p class="text-[11px] text-slate-400 truncate mt-0.5">${item.address}</p>
+            </div>
+
+            <p class="text-xs text-slate-300 leading-relaxed bg-slate-800/40 p-2.5 rounded-xl border border-slate-800">
+              ${item.story}
+            </p>
+
+            ${tagsHtml ? `<div class="space-y-1.5 pt-1">${tagsHtml}</div>` : ''}
+          </div>
+        `;
+        container.insertAdjacentHTML('beforeend', card);
+      });
+    }
+
+    // 底部 Tab 切換
+    function switchTab(tabKey) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.getElementById(`tab-${tabKey}`).classList.remove('hidden');
+
+      ['itinerary', 'logistics', 'budget'].forEach(key => {
+        const btn = document.getElementById(`navBtn-${key}`);
+        if (key === tabKey) {
+          btn.className = "flex flex-col items-center gap-1 text-rose-500 font-semibold transition";
+        } else {
+          btn.className = "flex flex-col items-center gap-1 text-slate-400 hover:text-slate-200 transition";
+        }
+      });
+      lucide.createIcons();
+    }
+
+    // 記帳計算器邏輯
+    function addExpense() {
+      const itemInput = document.getElementById('expenseItem');
+      const amountInput = document.getElementById('expenseAmount');
+      const payerSelect = document.getElementById('expensePayer');
+      const categorySelect = document.getElementById('expenseCategory');
+
+      const item = itemInput.value.trim();
+      const amount = parseInt(amountInput.value);
+
+      if (!item || isNaN(amount) || amount <= 0) {
+        alert("請輸入有效的項目名稱與金額");
+        return;
+      }
+
+      expenses.unshift({
+        id: Date.now(),
+        item: item,
+        amount: amount,
+        payer: payerSelect.value,
+        cat: categorySelect.value
+      });
+
+      saveExpenses();
+      renderExpenses();
+
+      itemInput.value = "";
+      amountInput.value = "";
+      lucide.createIcons();
+    }
+
+    function removeExpense(id) {
+      expenses = expenses.filter(e => e.id !== id);
+      saveExpenses();
+      renderExpenses();
+      lucide.createIcons();
+    }
+
+    function clearExpenses() {
+      if (confirm("確定要清空所有記帳明細嗎？")) {
+        expenses = [];
+        saveExpenses();
+        renderExpenses();
+        lucide.createIcons();
+      }
+    }
+
+    function saveExpenses() {
+      localStorage.setItem('osaka_expenses_2026', JSON.stringify(expenses));
+    }
+
+    function renderExpenses() {
+      const list = document.getElementById('expenseList');
+      const totalEl = document.getElementById('totalExpenseDisplay');
+      const perPersonEl = document.getElementById('perPersonDisplay');
+
+      list.innerHTML = "";
+      let total = 0;
+
+      expenses.forEach(e => {
+        total += e.amount;
+        const itemRow = `
+          <div class="flex items-center justify-between bg-slate-800/60 border border-slate-700/50 p-2.5 rounded-xl text-xs">
+            <div>
+              <div class="font-bold text-slate-200">${e.item} <span class="text-[10px] text-slate-400 font-normal">(${e.cat}・${e.payer})</span></div>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="font-mono font-bold text-emerald-400">¥${e.amount.toLocaleString()}</span>
+              <button onclick="removeExpense(${e.id})" class="text-slate-500 hover:text-rose-400">
+                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </div>
+        `;
+        list.insertAdjacentHTML('beforeend', itemRow);
+      });
+
+      totalEl.innerText = `¥${total.toLocaleString()}`;
+      const perPerson = Math.round(total / 4);
+      perPersonEl.innerText = `¥${perPerson.toLocaleString()} / 人`;
+    }
+
+    function toggleModal(id) {
+      const modal = document.getElementById(id);
+      modal.classList.toggle('hidden');
+      lucide.createIcons();
+    }
+  </script>
+</body>
+</html>
