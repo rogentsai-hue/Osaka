@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
   <title>2026 大阪花火節 5日遊</title>
   
-  <!-- PWA & iOS App Icon 設定：桌面上會顯示這張合照 -->
-  <link rel="apple-touch-icon" href="photo.jpg">
-  <link rel="icon" type="image/jpeg" href="photo.jpg">
+  <!-- PWA & iOS App Icon 設定：使用 icon.png -->
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="icon" type="image/png" href="icon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="大阪花火行">
@@ -71,13 +71,13 @@
   <!-- 主內容分頁容器 -->
   <main class="max-w-md mx-auto p-4 space-y-4">
 
-    <!-- ================= 4 人專屬合照封面橫幅 (支援點擊更換/自動讀取 photo.jpg) ================= -->
+    <!-- ================= 4 人專屬合照封面橫幅 ================= -->
     <div class="relative overflow-hidden rounded-3xl border border-slate-800 shadow-xl bg-slate-900 group">
       <img id="groupPhotoImg" 
-           src="photo.jpg" 
+           src="icon.png" 
            alt="大阪4人行合照" 
            class="w-full h-48 object-cover object-center transition duration-500 group-hover:scale-105"
-           onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1545569341-9eb8b30979d9?q=80&w=1000&auto=format&fit=crop'; document.getElementById('photoUploadTip').classList.remove('hidden');" />
+           onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1545569341-9eb8b30979d9?q=80&w=1000&auto=format&fit=crop';" />
       
       <!-- 遮罩漸層 -->
       <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
@@ -92,17 +92,11 @@
           <p class="text-xs font-bold text-white tracking-wide drop-shadow">淀川花火節特攻之旅 🎆</p>
         </div>
         
-        <!-- 手動換照片按鈕（方便在手機上臨時換圖） -->
         <label for="localPhotoInput" class="cursor-pointer p-2 bg-black/60 hover:bg-black/80 backdrop-blur-md rounded-xl text-slate-200 border border-white/20 active:scale-95 transition flex items-center gap-1 text-[11px]">
           <i data-lucide="camera" class="w-3.5 h-3.5 text-rose-400"></i>
           <span>換照片</span>
         </label>
         <input type="file" id="localPhotoInput" accept="image/*" class="hidden" onchange="previewUserPhoto(event)" />
-      </div>
-
-      <!-- 若還沒放 photo.jpg 的溫馨提示 -->
-      <div id="photoUploadTip" class="hidden absolute top-2 right-2 bg-amber-500/90 text-slate-950 px-2 py-1 rounded-lg text-[10px] font-bold shadow">
-        提示：放一張 photo.jpg 在同目錄即可
       </div>
     </div>
 
@@ -127,7 +121,7 @@
         </button>
       </div>
 
-      <!-- 天氣小卡 (動態切換) -->
+      <!-- 天氣小卡 -->
       <div id="weatherCard" class="bg-gradient-to-r from-sky-900/60 via-blue-900/40 to-slate-900 border border-sky-700/30 rounded-2xl p-3.5 flex items-center justify-between shadow">
         <div class="flex items-center space-x-3">
           <div id="weatherIconContainer" class="p-2.5 bg-sky-500/20 rounded-xl text-sky-400">
@@ -148,9 +142,7 @@
       </div>
 
       <!-- 行程內容清單容器 -->
-      <div id="itineraryCardsContainer" class="space-y-4">
-        <!-- 由 JS 動態注入卡片 -->
-      </div>
+      <div id="itineraryCardsContainer" class="space-y-4"></div>
     </section>
 
     <!-- ================= 頁籤 2: 航班與住宿 ================= -->
@@ -266,7 +258,6 @@
 
     <!-- ================= 頁籤 3: 記帳/預算表 ================= -->
     <section id="tab-budget" class="tab-content hidden space-y-4">
-      <!-- 預算總覽小卡 -->
       <div class="bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 rounded-2xl p-4 shadow">
         <div class="text-xs text-slate-400 mb-1">公積金 / 已記帳總開銷 (4人)</div>
         <div class="text-2xl font-black text-emerald-400 font-mono tracking-tight" id="totalExpenseDisplay">¥0</div>
@@ -276,7 +267,6 @@
         </div>
       </div>
 
-      <!-- 新增記帳表單 -->
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow space-y-3 text-xs">
         <h3 class="font-bold text-white flex items-center gap-1.5">
           <i data-lucide="plus-circle" class="w-4 h-4 text-emerald-400"></i> 新增支出項目
@@ -306,15 +296,12 @@
         </button>
       </div>
 
-      <!-- 記帳明細列表 -->
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow space-y-2">
         <div class="flex justify-between items-center mb-1">
           <h3 class="text-xs font-bold text-slate-300">開銷明細</h3>
           <button onclick="clearExpenses()" class="text-[11px] text-slate-500 hover:text-red-400">清空明細</button>
         </div>
-        <div id="expenseList" class="space-y-2 max-h-72 overflow-y-auto pr-1">
-          <!-- JS 動態生成明細 -->
-        </div>
+        <div id="expenseList" class="space-y-2 max-h-72 overflow-y-auto pr-1"></div>
       </div>
     </section>
 
@@ -352,17 +339,10 @@
         <div>
           <h4 class="font-bold text-emerald-400 mb-1">📱 如何讓桌面圖示變成我們的合照？</h4>
           <p class="text-slate-400 leading-relaxed">
-            1. 將合照更名為 <code>photo.jpg</code>，放在與 <code>index.html</code> 相同的資料夾上傳。<br>
+            1. 將合照更名為 <code>icon.png</code>，放在與 <code>index.html</code> 相同的資料夾上傳。<br>
             2. 用 iPhone Safari 打開你的網頁。<br>
             3. 點擊瀏覽器下方<strong>「分享」圖示</strong>（箭頭朝上的方塊）。<br>
             4. 往下滑動點選<strong>「加入主畫面」</strong> ➔ 點右上角<strong>「新增」</strong>即可！
-          </p>
-        </div>
-
-        <div>
-          <h4 class="font-bold text-sky-400 mb-1">🚀 推薦上線方式（最簡單快速）</h4>
-          <p class="text-slate-400 leading-relaxed">
-            打開 <a href="https://vercel.com" target="_blank" class="text-sky-400 underline">Vercel.com</a> 或 <a href="https://app.netlify.com/drop" target="_blank" class="text-sky-400 underline">Netlify Drop</a>，直接把整個資料夾（包含 <code>index.html</code> 與 <code>photo.jpg</code>）拖曳進去，不到 30 秒就獲得一個 https 專屬網址，4 個人都能在手機直接打開安裝！
           </p>
         </div>
       </div>
@@ -375,7 +355,6 @@
 
   <!-- JavaScript 邏輯程式庫 -->
   <script>
-    // 每日行程與天氣數據庫
     const itineraryData = {
       1: {
         date: "2026/10/15 (週四)",
@@ -570,7 +549,6 @@
       }
     };
 
-    // 初始記帳數據 (自動持久化保存)
     let expenses = JSON.parse(localStorage.getItem('osaka_expenses_2026') || 'null');
     if (!expenses) {
       expenses = [
@@ -582,9 +560,7 @@
 
     let currentDay = 1;
 
-    // 頁面加載完成後執行
     document.addEventListener("DOMContentLoaded", () => {
-      // 檢查 localStorage 是否有手動上傳儲存的照片
       const savedPhoto = localStorage.getItem('osaka_group_photo');
       if (savedPhoto) {
         document.getElementById('groupPhotoImg').src = savedPhoto;
@@ -594,7 +570,6 @@
       lucide.createIcons();
     });
 
-    // 支援直接在手機上選擇相簿照片替換
     function previewUserPhoto(event) {
       const file = event.target.files[0];
       if (file) {
@@ -605,14 +580,13 @@
           try {
             localStorage.setItem('osaka_group_photo', base64Img);
           } catch(err) {
-            console.log("照片檔案較大，暫無法完全寫入 LocalStorage，但當前頁面已可預覽");
+            console.log("照片太大，僅限當次預覽");
           }
         }
         reader.readAsDataURL(file);
       }
     }
 
-    // 切換天數
     function switchDay(dayNum) {
       currentDay = dayNum;
       document.querySelectorAll('.day-pill').forEach((btn, idx) => {
@@ -626,17 +600,13 @@
       lucide.createIcons();
     }
 
-    // 渲染指定天數行程
     function renderDay(day) {
       const data = itineraryData[day];
-      
-      // 更新天氣
       document.getElementById('weatherLocation').innerText = `大阪市區 ｜ ${data.date}`;
       document.getElementById('weatherTemp').innerText = data.weather.temp;
       document.getElementById('weatherStatus').innerText = data.weather.text;
       document.getElementById('weatherRain').innerText = data.weather.rain;
 
-      // 更新卡片清單
       const container = document.getElementById('itineraryCardsContainer');
       container.innerHTML = "";
 
@@ -699,7 +669,6 @@
       });
     }
 
-    // 底部 Tab 切換
     function switchTab(tabKey) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
       document.getElementById(`tab-${tabKey}`).classList.remove('hidden');
@@ -715,7 +684,6 @@
       lucide.createIcons();
     }
 
-    // 記帳計算器邏輯
     function addExpense() {
       const itemInput = document.getElementById('expenseItem');
       const amountInput = document.getElementById('expenseAmount');
