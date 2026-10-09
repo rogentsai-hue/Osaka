@@ -336,23 +336,21 @@
 
       <div class="space-y-3">
         <div>
+          <h4 class="font-bold text-amber-400 mb-1">🥔 中村屋可樂餅 (09:00 開門)</h4>
+          <p class="text-slate-400 leading-relaxed">
+            天神橋筋2丁目，早上 09:00 就開始營業！剛起鍋的可樂餅香脆無比，週日公休因此週五吃正好。
+          </p>
+        </div>
+        <div>
+          <h4 class="font-bold text-emerald-400 mb-1">🍙 Onigiri Ponytail (おにぎりポニーテール)</h4>
+          <p class="text-slate-400 leading-relaxed">
+            就在中村屋隔壁（步行1分鐘）！精緻日式飯糰御膳，溫熱現捏飯糰香氣十足、無限續點！
+          </p>
+        </div>
+        <div>
           <h4 class="font-bold text-rose-400 mb-1">🥩 新宿燒肉 牛舌的檸檬 大阪本店</h4>
           <p class="text-slate-400 leading-relaxed">
-            電話：<code>06-6964-8265</code><br>
-            地址：大阪市中央区千日前2-5-2 1F<br>
-            • 建議提前打電話或線上確認預約，若客滿建議於 17:00 開店前至現場排隊！
-          </p>
-        </div>
-        <div>
-          <h4 class="font-bold text-emerald-400 mb-1">🍵 OBRA 抹茶 (難波站前)</h4>
-          <p class="text-slate-400 leading-relaxed">
-            位於 JR 難波站前 APA 飯店內，營業至夜間（23:00），以多種濃度手沖抹茶拿鐵與可麗露聞名！
-          </p>
-        </div>
-        <div>
-          <h4 class="font-bold text-sky-400 mb-1">🍜 牡蠣拉麵 next shikaku</h4>
-          <p class="text-slate-400 leading-relaxed">
-            難波知名光影藝術拉麵店，以 100% 牡蠣鮮濃白湯出名！
+            電話：<code>06-6964-8265</code> ｜ 建議提早打電話或線上確認能否預訂！
           </p>
         </div>
       </div>
@@ -421,28 +419,40 @@
         items: [
           {
             type: "food",
-            time: "10:30",
-            title: "名物排隊美食：中村屋可樂餅",
+            time: "09:30",
+            title: "名物現炸：中村屋可樂餅 (09:00 開門！)",
             address: "日本〒530-0041 Osaka, Kita Ward, Tenjinbashi, 2 Chome−3−21",
             navQuery: "中村屋 コロッケ 大阪 天神橋",
-            story: "【大阪傳奇炸物】日本藝人濱田雅功激推的元祖可樂餅！剛起鍋外皮金黃酥脆，內餡洋蔥與馬鈴薯甘甜綿密，一吃就驚豔！",
+            story: "【早上09:00就開賣】日本藝人濱田雅功激推的元祖可樂餅！剛起鍋外皮金黃酥脆，內餡洋蔥與馬鈴薯甘甜綿密，剛出鍋最香！",
             tags: {
               food: "現炸牛肉馬鈴薯可樂餅 (コロッケ ¥100)、炸肉餅",
-              reserve: "天神橋筋2丁目，週日公休所以週五吃正好！"
+              reserve: "⚠️ 備忘：早上 09:00 開門！週日公休因此週五吃正好"
+            }
+          },
+          {
+            type: "food",
+            time: "11:00",
+            title: "人氣飯糰：Onigiri Ponytail (おにぎりポニーテール)",
+            address: "大阪府大阪市北区天神橋2-5-17 (天神橋筋2丁目)",
+            navQuery: "おにぎりポニーテール 天神橋",
+            story: "【就在中村屋隔壁！步行1分鐘】大阪爆紅的日式飯糰名店！精緻木盤盛裝多款日料小缽與現捏熱呼呼飯糰，主打『飯糰無限續點』，米粒Q彈飽滿、香氣十足！",
+            tags: {
+              food: "蒸籠豚肉鮮蔬飯糰御膳、鮭魚卵飯糰、現捏米飯(無限續)",
+              menu: "自製鯛茶漬け (高湯泡飯DIY)、日替鮮魚小缽"
             }
           },
           {
             type: "spot",
-            time: "11:30",
-            title: "中之島水岸散策 ＆ 文青咖啡",
+            time: "12:30",
+            title: "中之島水岸散策 ＆ 正統印度咖哩 (DIWALI)",
             address: "Nakanoshima, Kita Ward, Osaka",
             navQuery: "Nakanoshima Park, Osaka",
-            story: "在中之島公園與水岸旁漫步，享受秋天舒適涼風。欣賞安藤忠雄建築與中央公會堂的紅磚復古美感。",
-            tags: { menu: "水岸露天咖啡、法式手作可麗露" }
+            story: "在中之島公園與水岸旁漫步，享受秋天舒適涼風。周邊有水岸咖啡或正統印度香料餐廳 DIWALI，品嚐爆漿起司烤餅與香料咖哩。",
+            tags: { menu: "水岸秋色步道、中央公會堂、起司烤餅 (Cheese Naan)" }
           },
           {
             type: "spot",
-            time: "14:00",
+            time: "14:30",
             title: "梅田商圈採買：育てるタオル (阪急) ＆ LE TALON (LUCUA)",
             address: "梅田站直通 阪急うめだ本店 ＆ LUCUA OSAKA",
             navQuery: "Hankyu Umeda Main Store, Osaka",
