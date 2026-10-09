@@ -59,7 +59,7 @@
       </div>
     </div>
     <div class="flex items-center space-x-2">
-      <button onclick="toggleModal('infoModal')" class="p-2 bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-300 rounded-full transition" title="專案部署說明">
+      <button onclick="toggleModal('infoModal')" class="p-2 bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-300 rounded-full transition" title="專案說明">
         <i data-lucide="help-circle" class="w-5 h-5"></i>
       </button>
       <span class="px-2.5 py-1 bg-rose-500/20 border border-rose-500/40 text-rose-300 rounded-full text-xs font-semibold">
@@ -328,7 +328,7 @@
   <div id="infoModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-sm w-full p-5 space-y-4 shadow-2xl text-xs text-slate-300 max-h-[85vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-        <h3 class="font-bold text-white text-sm">💡 行程亮點與動線說明</h3>
+        <h3 class="font-bold text-white text-sm">💡 行程重點與小抄</h3>
         <button onclick="toggleModal('infoModal')" class="text-slate-400 hover:text-white">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
@@ -336,21 +336,21 @@
 
       <div class="space-y-3">
         <div>
-          <h4 class="font-bold text-emerald-400 mb-1">📍 10/16 堀江・南船場動線</h4>
+          <h4 class="font-bold text-emerald-400 mb-1">🍵 OBRA 抹茶 (難波站前)</h4>
           <p class="text-slate-400 leading-relaxed">
-            下午在橘子街逛潮流選品，接著漫步到茶館 wad 喝抹茶吃和菓子，傍晚直達難波 Walk 居酒屋 Sashisu，全程皆在同一生活圈步行即可！
+            位於 JR 難波站前 APA 飯店內，營業至夜間（23:00），以多種濃度手沖抹茶拿鐵與可麗露聞名，是絕佳宵夜飲品！
           </p>
         </div>
         <div>
-          <h4 class="font-bold text-rose-400 mb-1">👘 10/17 浴衣花火日輕裝上陣</h4>
+          <h4 class="font-bold text-rose-400 mb-1">🍸 梅田酒吧推薦：Bar K</h4>
           <p class="text-slate-400 leading-relaxed">
-            梅田百貨逛街移至週日，今天專注於：可樂餅、特色咖啡館、浴衣妝髮、淀川花火！散場後店家多已打烊，記得加購<strong>「隔日歸還」</strong>。
+            北新地傳奇日式酒吧、Tabelog 百名店！調酒細膩優雅，居酒屋吃完步行即可抵達。
           </p>
         </div>
         <div>
-          <h4 class="font-bold text-sky-400 mb-1">🛍️ 10/18 梅田百貨集中買齊</h4>
+          <h4 class="font-bold text-sky-400 mb-1">🍜 牡蠣拉麵 next shikaku</h4>
           <p class="text-slate-400 leading-relaxed">
-            下午專門留給梅田商圈，一次買好「育てるタオル (阪急8F)」與「LE TALON (LUCUA 3F)」，直接在百貨統一退稅！
+            難波知名拉麵店，以光影藝術裝潢與 100% 牡蠣鮮濃白湯出名，麵條吸汁極佳！
           </p>
         </div>
       </div>
@@ -383,17 +383,33 @@
             title: "飯店 Check-in: WELLSTAY Cocochill",
             address: "3 Chome-2-14 Motomachi, Naniwa Ward, Osaka",
             navQuery: "3 Chome-2-14 Motomachi, Naniwa Ward, Osaka, 556-0016",
-            story: "公寓式飯店，與在地等待的 Patty 正式四人合體！放行李、整裝，徒步前往道頓堀・心齋橋商圈探索。",
+            story: "公寓式飯店，與在地等待的 Patty 正式四人合體！放行李、稍作休息，準備展開大阪美食之夜。",
             tags: { reserve: "MF6W+79 大阪市 日本大阪府" }
           },
           {
             type: "food",
             time: "18:30",
-            title: "心齋橋・道頓堀 漫步與歡迎晚餐",
-            address: "道頓堀, Chuo Ward, Osaka",
-            navQuery: "Dotonbori, Osaka",
-            story: "四人合體第一晚！在熱鬧非凡的道頓堀巨型招牌下拍照留念，品嚐元祖大阪燒、章魚燒或拉麵，感受關西滿滿的熱情活力。",
-            tags: { food: "道頓堀美津的大阪燒、本家大章魚燒、千房" }
+            title: "晚餐：精選和牛燒肉 (待定)",
+            address: "心齋橋 / 難波周邊燒肉",
+            navQuery: "Yakiniku Namba Osaka",
+            story: "四人合體的第一餐！大口享受油花均勻的黑毛和牛、鹽烤牛舌與生啤酒，慶祝大阪花火之旅順利開拔！",
+            tags: {
+              food: "厚切特上牛舌、特選牛五花、橫膈膜",
+              menu: "備選名單：板前燒肉一斗、燒肉力丸、空 鶴橋燒肉"
+            }
+          },
+          {
+            type: "food",
+            time: "21:00",
+            title: "OBRA 抹茶 (夜間抹茶・開到23:00)",
+            address: "日本大阪市浪速区湊町1丁目2-13 (APA Hotel難波站前 1F)",
+            navQuery: "OBRA cafe 湊町 大阪",
+            story: "【深夜抹茶控天堂】距離飯店步行僅數分鐘！由人氣網紅永田智也創立的質感手沖抹茶店。主打不同濃度的宇治抹茶（祝、瑞雲、和乃）與甘苦醇厚的抹茶拿鐵，宵夜來一杯超療癒！",
+            tags: {
+              food: "特濃宇治手沖抹茶、和乃抹茶拿鐵、草莓抹茶牛奶",
+              menu: "現烤抹茶可麗露 (兩顆¥600)",
+              reserve: "營業時間至 23:00，吃完燒肉散步過來喝正好"
+            }
           }
         ]
       },
@@ -402,56 +418,61 @@
         weather: { temp: "21°C", text: "秋高氣爽", rain: "0%", icon: "sun" },
         items: [
           {
-            type: "spot",
+            type: "food",
             time: "10:30",
-            title: "中之島水岸散策 / 大阪城公園",
+            title: "名物排隊美食：中村屋可樂餅",
+            address: "日本〒530-0041 Osaka, Kita Ward, Tenjinbashi, 2 Chome−3−21",
+            navQuery: "中村屋 コロッケ 大阪 天神橋",
+            story: "【大阪傳奇炸物】日本藝人濱田雅功激推的元祖可樂餅！剛起鍋外皮金黃酥脆，內餡洋蔥與馬鈴薯甘甜綿密，一吃就驚豔！",
+            tags: {
+              food: "現炸牛肉馬鈴薯可樂餅 (コロッケ ¥100)、炸肉餅",
+              reserve: "天神橋筋2丁目，週日公休所以週五吃正好！"
+            }
+          },
+          {
+            type: "spot",
+            time: "11:30",
+            title: "中之島水岸散策 ＆ 文青咖啡",
             address: "Nakanoshima, Kita Ward, Osaka",
             navQuery: "Nakanoshima Park, Osaka",
-            story: "早晨感受秋季微風，可在中之島的河岸咖啡廳放空，欣賞安藤忠雄設計的童書森林建築與美麗紅葉初轉色。",
-            tags: { menu: "河畔手沖咖啡、現烤牛角可頌" }
+            story: "在中之島公園與水岸旁漫步，享受秋天舒適涼風。欣賞安藤忠雄建築與中央公會堂的紅磚復古美感。",
+            tags: { menu: "水岸露天咖啡、法式手作可麗露" }
           },
           {
             type: "spot",
             time: "14:00",
-            title: "橘子街 (Orange Street / 堀江) 潮流古著選品巡禮",
-            address: "Minamihorie, Nishi Ward, Osaka",
-            navQuery: "Orange Street Osaka, Minamihorie",
-            story: "【好逛又好拍】大阪最受年輕人喜愛的潮流街區！兩旁林立著日本設計師品牌服飾、質感家具道具店與中古古著店，街景極具文青氣息。",
-            tags: { souvenir: "日系獨立香氛、生活道具、設計選品、潮流Tee" }
-          },
-          {
-            type: "spot",
-            time: "16:00",
-            title: "茶館 wad (wad omotenashi cafe) 喝抹茶品茶點",
-            address: "日本〒542-0081 Osaka, Chuo Ward, Minamisenba, 4 Chome−9−3 東新ビル 2F",
-            navQuery: "Osaka, Chuo Ward, Minamisenba, 4 Chome−9−3 東新ビル 2F",
-            story: "【在居酒屋前品茗放鬆】從橘子街散步過來只要10分鐘！以「侘寂」美學與傳統金繼（金継ぎ）聞名的沉靜茶館。在簡約雅緻的空間裡品嚐職人手刷抹茶與和菓子，享受寧靜午後。",
+            title: "梅田商圈採買：育てるタオル (阪急) ＆ LE TALON (LUCUA)",
+            address: "梅田站直通 阪急うめだ本店 ＆ LUCUA OSAKA",
+            navQuery: "Hankyu Umeda Main Store, Osaka",
+            story: "直奔梅田核心百貨！先在阪急8F購入越洗越蓬鬆柔軟的「育てるタオル」毛巾，再至LUCUA 3F選購專為亞洲人設計的「LE TALON」優雅女鞋。",
             tags: {
-              food: "宇治濃抹茶、冷萃焙茶",
-              menu: "季節上生菓子、現烤日式糰子 (お団子)",
-              souvenir: "原葉日本茶包、職人手作陶藝杯"
+              souvenir: "育てるタオル feel 圓筒禮盒毛巾、LE TALON 舒適軟皮革鞋款",
+              reserve: "記得攜帶護照於各百貨退稅櫃台辦理外國人退稅"
             }
           },
           {
             type: "food",
             time: "17:30",
-            title: "超人氣排隊居酒屋：Sushi Sakaba Sashisu (難波Walk店)",
+            title: "人氣居酒屋：Sushi Sakaba Sashisu",
             address: "日本〒542-0074 Osaka, Chuo Ward, Sennichimae, 1 Chome 虹の街5-11 なんばウォーク3番街南通り",
             navQuery: "Sushi Sakaba Sashisu Namba Walk",
-            story: "【就在附近！喝完茶步行即達】大阪話題度最高的爆料壽司居酒屋！海鮮食材新鮮、視覺震撼且價格親民。建議傍晚 17:30 抵達搶先進場免受排隊之苦。",
+            story: "【排隊超值壽司居酒屋】視覺效果滿分、鮮度破表的現代壽司居酒屋！搶在傍晚入場享受招牌滿溢鮪魚卷與甜蝦握壽司。",
             tags: {
               food: "溢れ鮪魚鐵火卷 (トロ鉄火巻)、エビ7 (7隻甜蝦握壽司)",
-              menu: "炙燒鮭魚腹握壽司、海老紫蘇天婦羅、角High威士忌"
+              menu: "炙燒鮭魚腹握壽司、海老紫蘇天婦羅、角High"
             }
           },
           {
-            type: "spot",
+            type: "food",
             time: "20:30",
-            title: "難波地下街 & Bic Camera / 唐吉訶德 採買補給",
-            address: "Sennichimae, Chuo Ward, Osaka",
-            navQuery: "Bic Camera Namba, Osaka",
-            story: "居酒屋吃飽後，就近採買明天花火節的必需品：濕紙巾、野餐小零食、行動電源與飲料。",
-            tags: { souvenir: "日本藥妝、防蚊貼、保溫瓶" }
+            title: "🍸 梅田/北新地酒吧推薦：Bar K",
+            address: "大阪府大阪市北区曽根崎新地1-3-3 好陽ビル B1F",
+            navQuery: "Bar K Sonezakishinchi Osaka",
+            story: "【Tabelog 頂級百名酒吧】大阪北新地殿堂級經典酒吧！以極致細膩的日式調酒手法、冰塊工藝與沉穩高雅的氛圍著稱。若想看夜景亦推薦 The Ritz-Carlton 5F『The Bar』。",
+            tags: {
+              menu: "經典 Gimlet (琴吉利)、季節鮮果特調、日威單杯",
+              reserve: "氛圍靜謐迷人，居酒屋後小酌首選"
+            }
           }
         ]
       },
@@ -461,48 +482,36 @@
         items: [
           {
             type: "food",
-            time: "10:30",
-            title: "早午餐名物：中村屋可樂餅 (天神橋筋2丁目)",
-            address: "日本〒530-0041 Osaka, Kita Ward, Tenjinbashi, 2 Chome−3−21",
-            navQuery: "中村屋 コロッケ 大阪 天神橋",
-            story: "【大阪傳奇排隊炸物】藝人濱田雅功的最愛！金黃香脆的外皮，包覆著甘甜熱騰騰的洋蔥牛肉馬鈴薯餡。在天神橋筋商店街吃可樂餅、參拜大阪天滿宮，享受悠閒週六早晨。",
+            time: "11:30",
+            title: "午餐：正統日式壽喜燒 (現場排隊)",
+            address: "心齋橋 / 難波周邊壽喜燒老舖",
+            navQuery: "Sukiyaki Namba Osaka",
+            story: "【大啖頂級牛肉】中午現場排隊享用關西風壽喜燒！以牛油熱鍋、撒上砂糖倒入醬油煎烤頂級和牛，裹上金黃生蛋液入口即化。",
             tags: {
-              food: "現炸牛肉馬鈴薯可樂餅 (コロッケ ¥100)、炸牛肉餅 (ミンチカツ)",
-              reserve: "⚠️ 注意：中村屋週日公休、週六僅營業至16:00！今天吃正好"
-            }
-          },
-          {
-            type: "spot",
-            time: "12:30",
-            title: "留空放鬆：周邊人氣特色咖啡館慢活",
-            address: "天滿・中崎町 或 浴衣店周邊特色咖啡店",
-            navQuery: "Nakazakicho Cafe, Osaka",
-            story: "【行程留空・悠閒喝咖啡】將梅田逛街移開後，午間完全沒有趕行程的壓力！找一間文青復古的特色咖啡館，點杯手沖單品與戚風蛋糕，四個人愜意聊天、為下午換浴衣蓄積體力。",
-            tags: {
-              menu: "手沖單品咖啡、巴斯克乳酪蛋糕、昭和布丁",
-              reserve: "愜意彈性時段，可自由發掘周邊巷弄小店"
+              food: "特選和牛壽喜燒套餐、大蔥、烤豆腐、蒟蒻絲",
+              menu: "推薦名單：はり重 (Hariju 道頓堀老舖) 或 本格すき焼き"
             }
           },
           {
             type: "spot",
             time: "14:30",
             title: "👘 浴衣租借換裝 ＆ 店家專業妝髮造型",
-            address: "預約店家待定 (推薦：梅田或心齋橋周邊和服店)",
+            address: "預約店家待定 (推薦心齋橋或梅田周邊和服店)",
             navQuery: "Kimono Rental Osaka",
-            story: "【花火節重頭戲前置】四人換上日本傳統夏日浴衣！女孩由店家專業造型師精心盤髮與搭配髮飾，男生穿上俐落浴衣與木屐，變身道地花火節造型！",
+            story: "【花火節變身】四人換上日本傳統夏日浴衣！女孩由專業髮型師精心盤髮、戴上花飾，男生著俐落浴衣與木屐，準備拍出奇蹟美照！",
             tags: {
-              reserve: "重要：散場已晚，預約時請務必加購『隔日歸還 (翌日返却)』服務！",
-              menu: "小貼士：木屐走久易磨腳，包包內可悄悄備一雙平底休閒鞋"
+              reserve: "重要：散場已晚，預約時務必加購『隔日歸還 (翌日返却)』！",
+              menu: "小技巧：可在隨身包包內備一雙平底便鞋避免木屐磨腳"
             }
           },
           {
             type: "transport",
             time: "17:00",
-            title: "準時出發前往會場！(避開管制人潮)",
+            title: "準時出發前往會場！(避開百萬人潮管制)",
             address: "淀川河川敷 十三會場 (e+エリア)",
             navQuery: "Juso Station, Osaka",
-            story: "【17:00 準時出發】身著浴衣搭乘阪急電鐵前往『十三站』或JR『塚本站』。人潮極多，提早於 17:30~18:00 前抵達河川敷，順利入座 e+シート。",
-            tags: { reserve: "攜帶清單：花火門票憑證、野餐坐墊、保暖披肩/外套、濕紙巾" }
+            story: "【17:00 準時搭車出發】身著浴衣搭車前往『十三站』或JR『塚本站』。提早於 17:30~18:00 前進場入座 e+シート，避開最擁擠時段。",
+            tags: { reserve: "攜帶清單：花火門票憑證、野餐坐墊、保暖披肩、濕紙巾" }
           },
           {
             type: "spot",
@@ -510,11 +519,20 @@
             title: "第38回 なにわ淀川花火大会 (震撼開演！)",
             address: "淀川河川敷 十三会場 (e+エリア)",
             navQuery: "Yodogawa Riverside Park, Osaka",
-            story: "【4人合照最高峰】身穿浴衣、手拿啤酒，在專屬 e+シート 座席仰望全日本最頂級的水上連發花火與巨型金黃瀑布，感動一生難忘！",
+            story: "【本次旅行核心】身穿浴衣、手拿啤酒，在 e+シート 專屬座席仰望全日本最頂級的水上連發花火與巨型瀑布，感動一生難忘！",
             tags: {
-              reserve: "票券：e+シート 4枚 (已付款 ¥31,320)",
-              menu: "散場秘訣：散場不要擠十三站，順著人潮往西走至『塚本站』或步行至『西中島南方站』避開人潮"
+              reserve: "票券代號：e+シート 4枚 (已付款 ¥31,320)",
+              menu: "散場秘訣：向西步行往『塚本站』或步行至『西中島南方站』避開人潮"
             }
+          },
+          {
+            type: "spot",
+            time: "21:00",
+            title: "夜間時段：待定 (宵夜/慶功彈性安排)",
+            address: "難波周邊深夜食堂",
+            navQuery: "Dotonbori Late Night Food",
+            story: "散場返回難波後，依體力彈性安排深夜拉麵、串炸或便利商店買啤酒零食回飯店大客廳開花火慶功派對！",
+            tags: { menu: "熱呼呼關東煮、章魚燒宵夜、罐裝沙瓦" }
           }
         ]
       },
@@ -524,34 +542,58 @@
         items: [
           {
             type: "spot",
-            time: "10:30",
-            title: "歸還浴衣 ＆ 黑門市場/木津市場 海鮮早午餐",
+            time: "10:00",
+            title: "順路歸還浴衣 ＆ 黑門市場海鮮巡禮",
             address: "2 Chome-4-1 Nipponbashi, Chuo Ward, Osaka",
             navQuery: "Kuromon Ichiba Market, Osaka",
-            story: "早上先將昨日租借的浴衣歸還店家。接著前往黑門市場享受炭烤扇貝、現剖海膽與神戶牛串燒，犒賞昨夜看花火的雙腿！",
-            tags: { food: "現開生海膽、現切黑鮪魚大腹刺身、炭烤大明蝦" }
-          },
-          {
-            type: "spot",
-            time: "13:30",
-            title: "梅田百貨採購：育てるタオル (阪急8F) ＆ LE TALON (LUCUA 3F)",
-            address: "阪急うめだ本店 ＆ LUCUA OSAKA (梅田站直通)",
-            navQuery: "Hankyu Umeda Main Store, Osaka",
-            story: "【改至週日專心採買】下午搭車前往梅田，採購清單一次搞定！先到阪急百貨8F買越洗越蓬鬆的「育てるタオル」經典圓筒毛巾，再步行3分鐘至LUCUA 3F挑選日本女生激推的「LE TALON」好穿女鞋。",
-            tags: {
-              souvenir: "育てるタオル feel 圓筒禮盒毛巾、LE TALON 舒適軟皮革低跟樂福鞋 / 瑪莉珍鞋",
-              menu: "LE TALON 必看：GRISE 系列防潑水晴雨兩用平底鞋",
-              reserve: "記得攜帶護照至阪急 B1 及 LUCUA 退稅櫃台辦理外國人退稅"
-            }
+            story: "先至店家歸還昨日浴衣，隨後漫步至黑門市場！大口品嚐現剖生海膽、現烤活扇貝、帝王蟹腳與神戶牛串燒。",
+            tags: { food: "現開活生蠔、黑鮪魚大腹刺身、炭烤大明蝦" }
           },
           {
             type: "food",
-            time: "18:30",
-            title: "心滿意足燒肉慶功夜 (國產黑毛和牛)",
-            address: "Namba, Osaka",
-            navQuery: "Yakiniku Namba, Osaka",
-            story: "最後一晚！四人共同舉杯慶祝花火節圓滿成功。享受油花分布均勻的炭火黑毛和牛燒肉與盛岡冷麵，為旅行畫下完美句點。",
-            tags: { menu: "蔥花鹽烤特上牛舌、橫膈膜、生牛肉拌生蛋黃" }
+            time: "12:00",
+            title: "午餐：next shikaku 牡蠣拉麵 (光影拉麵名店)",
+            address: "大阪市中央区難波千日前9-12 (難波站旁)",
+            navQuery: "next shikaku 難波",
+            story: "【難波話題拉麵店】拉麵名店「〇de▲」的姊妹店！宛如進入 teamLab 沉浸光影藝術空間。以大量牡蠣、雞與豚骨熬煮的濃醇牡蠣白湯，每一口都鮮美無比！",
+            tags: {
+              food: "牡蠣白湯拉麵 (coeru)、100%牡蠣清湯 (ikasu)、牡蠣沾麵",
+              menu: "炙燒肉壽司 (必點配菜！)"
+            }
+          },
+          {
+            type: "spot",
+            time: "14:00",
+            title: "橘子街 (Orange Street / 堀江) 潮流散策",
+            address: "Minamihorie, Nishi Ward, Osaka",
+            navQuery: "Orange Street Osaka, Minamihorie",
+            story: "大阪指標性街頭潮流與文青古著街區！街道舒適悠閒，匯聚 Supreme、BAPE、精緻生活選品店與美式中古服飾店。",
+            tags: { souvenir: "獨立香氛道具、生活選品雜貨、日牌服飾" }
+          },
+          {
+            type: "food",
+            time: "16:00",
+            title: "特濃巧克力牛奶：Melt Chocolate (心齋橋/南船場)",
+            address: "大阪府大阪市中央区南船場4丁目7-22 船場NSビル1F",
+            navQuery: "Melt Chocolate 南船場 大阪",
+            story: "【IG爆紅甜點】隱身南船場的黑白極簡巧克力專門店！最吸睛的是在濃醇熱巧克力牛奶上方「現刨厚厚一層巧克力磚」，香濃醇厚不甜膩！",
+            tags: {
+              food: "現刨現切特濃巧克力牛奶 (熱/冰)、巧克力霜淇淋",
+              reserve: "離下一站茶館 wad 僅步行2分鐘！"
+            }
+          },
+          {
+            type: "spot",
+            time: "17:00",
+            title: "茶館 wad (wad omotenashi cafe) 品茶放鬆",
+            address: "日本〒542-0081 Osaka, Chuo Ward, Minamisenba, 4 Chome−9−3 東新ビル 2F",
+            navQuery: "Osaka, Chuo Ward, Minamisenba, 4 Chome−9−3 東新ビル 2F",
+            story: "【極致侘寂美學】隱身南船場2樓的職人茶館。店內推崇傳統「金繼」陶藝，在此安靜品嚐手刷抹茶、冷萃焙茶與精緻和菓子，為今日畫下優雅句點。",
+            tags: {
+              food: "宇治濃抹茶、冷萃焙茶",
+              menu: "季節上生菓子、現烤糰子 (お団子)",
+              souvenir: "原葉日本茶包、職人手作陶藝杯"
+            }
           }
         ]
       },
