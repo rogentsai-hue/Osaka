@@ -108,7 +108,7 @@
           10/15 (四) D1
         </button>
         <button onclick="switchDay(2)" id="dayBtn-2" class="day-pill px-4 py-2 rounded-2xl text-xs font-semibold bg-slate-800 text-slate-400 flex-shrink-0 transition">
-          10/16 (五) D2
+          10/16 (五) D2 🛍️
         </button>
         <button onclick="switchDay(3)" id="dayBtn-3" class="day-pill px-4 py-2 rounded-2xl text-xs font-semibold bg-slate-800 text-slate-400 flex-shrink-0 transition">
           10/17 (六) D3 🎆
@@ -328,7 +328,7 @@
   <div id="infoModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-sm w-full p-5 space-y-4 shadow-2xl text-xs text-slate-300 max-h-[85vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-        <h3 class="font-bold text-white text-sm">💡 行程重點與小抄</h3>
+        <h3 class="font-bold text-white text-sm">💡 梅田採買與行程小抄</h3>
         <button onclick="toggleModal('infoModal')" class="text-slate-400 hover:text-white">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
@@ -336,21 +336,24 @@
 
       <div class="space-y-3">
         <div>
+          <h4 class="font-bold text-rose-400 mb-1">🛍️ 梅田百貨集中動線</h4>
+          <p class="text-slate-400 leading-relaxed">
+            • <strong>阪急百貨</strong>：8F 育てるタオル 毛巾 ➔ 2F/7F ReFa 美容美髮<br>
+            • <strong>LUCUA 3F</strong>：LE TALON 舒適女鞋 ＋ @cosme OSAKA 最大美妝旗艦店（同一層超好逛）<br>
+            • <strong>GRAND FRONT B1</strong>：茅乃舍頂級高湯包<br>
+            • <strong>阪神百貨 1F</strong>：一保堂茶舖京都老茶外帶
+          </p>
+        </div>
+        <div>
           <h4 class="font-bold text-amber-400 mb-1">🥔 中村屋可樂餅 (09:00 開門)</h4>
           <p class="text-slate-400 leading-relaxed">
             天神橋筋2丁目，早上 09:00 就開始營業！剛起鍋的可樂餅香脆無比，週日公休因此週五吃正好。
           </p>
         </div>
         <div>
-          <h4 class="font-bold text-emerald-400 mb-1">🍙 Onigiri Ponytail (おにぎりポニーテール)</h4>
+          <h4 class="font-bold text-emerald-400 mb-1">🥩 新宿燒肉 牛舌的檸檬</h4>
           <p class="text-slate-400 leading-relaxed">
-            就在中村屋隔壁（步行1分鐘）！精緻日式飯糰御膳，溫熱現捏飯糰香氣十足、無限續點！
-          </p>
-        </div>
-        <div>
-          <h4 class="font-bold text-rose-400 mb-1">🥩 新宿燒肉 牛舌的檸檬 大阪本店</h4>
-          <p class="text-slate-400 leading-relaxed">
-            電話：<code>06-6964-8265</code> ｜ 建議提早打電話或線上確認能否預訂！
+            電話：<code>06-6964-8265</code> ｜ 建議提早打電話確認能否預訂！
           </p>
         </div>
       </div>
@@ -414,7 +417,7 @@
         ]
       },
       2: {
-        date: "2026/10/16 (週五)",
+        date: "2026/10/16 (週五) 🛍️ 梅田百貨採買日",
         weather: { temp: "21°C", text: "秋高氣爽", rain: "0%", icon: "sun" },
         items: [
           {
@@ -452,23 +455,47 @@
           },
           {
             type: "spot",
-            time: "14:30",
-            title: "梅田商圈採買：育てるタオル (阪急) ＆ LE TALON (LUCUA)",
-            address: "梅田站直通 阪急うめだ本店 ＆ LUCUA OSAKA",
+            time: "14:00",
+            title: "🛍️ 梅田百貨必逛連線 1：阪急百貨 (毛巾＆ReFa)",
+            address: "大阪府大阪市北区角田町8-7 阪急うめだ本店",
             navQuery: "Hankyu Umeda Main Store, Osaka",
-            story: "直奔梅田核心百貨！先在阪急8F購入越洗越蓬鬆柔軟的「育てるタオル」毛巾，再至LUCUA 3F選購專為亞洲人設計的「LE TALON」優雅女鞋。",
+            story: "【朋友指名採買清單！】\n1. 8F『育てるタオル』：越洗越蓬鬆柔軟的頂級圓筒禮盒毛巾。\n2. 2F/7F『ReFa 專櫃』：日本爆紅的心型亮髮梳 (Heart Brush)、微米氣泡蓮蓬頭、熱門無線直髮夾！",
             tags: {
-              souvenir: "育てるタオル feel 圓筒禮盒毛巾、LE TALON 舒適軟皮革鞋款",
-              reserve: "記得攜帶護照於各百貨退稅櫃台辦理外國人退稅"
+              souvenir: "育てるタオル feel 經典圓筒毛巾、ReFa 心型梳、微米蓮蓬頭",
+              reserve: "必逛提醒：B1 服務台持護照先換 95折 外國人優惠券，再至退稅櫃台辦理退稅！"
+            }
+          },
+          {
+            type: "spot",
+            time: "15:30",
+            title: "🛍️ 梅田百貨必逛連線 2：LUCUA 3F (@cosme ＆ LE TALON)",
+            address: "大阪府大阪市北区梅田3-1-3 LUCUA 3F",
+            navQuery: "LUCUA Osaka, Osaka",
+            story: "【同一層樓神組合！】走空橋至 LUCUA 3F：\n1.『LE TALON』：專為亞洲腳型設計，主打低跟軟皮革鞋款。\n2.『@cosme OSAKA』：關西最大旗艦店！全日本美妝殿堂賞前三名陳列區、萬種 Tester 自由試用！",
+            tags: {
+              souvenir: "LE TALON 舒適軟皮革樂福鞋、@cosme 殿堂賞彩妝/保養品",
+              reserve: "必逛提醒：@cosme OSAKA 人潮眾多，必看當月 Best Cosmetics 排行榜專區！"
+            }
+          },
+          {
+            type: "spot",
+            time: "16:45",
+            title: "🛍️ 梅田名物伴手禮：茅乃舍 ＆ 一保堂茶舖",
+            address: "GRAND FRONT B1F ＆ 阪神百貨 1F",
+            navQuery: "茅乃舎 グランフロント大阪店",
+            story: "【日本頂級料理包與京都名茶】\n1.『茅乃舍 (GRAND FRONT B1)』：日本料理界無人不知的頂級純天然高湯包與胡麻醬。\n2.『一保堂茶舖 (阪神百貨 1F)』：京都三百年老茶舖，可現場外帶一杯手刷特濃抹茶拿鐵或購買極上焙茶粉！",
+            tags: {
+              souvenir: "茅乃舍經典高湯包、蔬菜高湯、一保堂抹茶粉/煎茶茶包",
+              menu: "一保堂必喝：外帶現刷抹茶拿鐵 (濃郁回甘)"
             }
           },
           {
             type: "food",
-            time: "17:30",
+            time: "18:00",
             title: "人氣居酒屋：Sushi Sakaba Sashisu",
             address: "日本〒542-0074 Osaka, Chuo Ward, Sennichimae, 1 Chome 虹の街5-11 なんばウォーク3番街南通り",
             navQuery: "Sushi Sakaba Sashisu Namba Walk",
-            story: "【排隊超值壽司居酒屋】視覺效果滿分、鮮度破表的現代壽司居酒屋！搶在傍晚入場享受招牌滿溢鮪魚卷與甜蝦握壽司。",
+            story: "【排隊超值壽司居酒屋】大採買後回到難波！視覺效果滿分、鮮度破表的現代壽司居酒屋！犒賞滿滿戰利品的雙手。",
             tags: {
               food: "溢れ鮪魚鐵火卷 (トロ鉄火巻)、エビ7 (7隻甜蝦握壽司)",
               menu: "炙燒鮭魚腹握壽司、海老紫蘇天婦羅、角High"
@@ -735,7 +762,7 @@
             tagsHtml += `<div class="text-[11px]"><span class="font-bold text-purple-400">🎁 必買伴手禮：</span><span class="text-slate-200 font-semibold">${item.tags.souvenir}</span></div>`;
           }
           if (item.tags.reserve) {
-            tagsHtml += `<div class="text-[11px] bg-slate-900/90 p-2 rounded-lg border border-slate-700/60 text-slate-300"><span class="font-bold text-sky-400">📌 重要備忘/攻略：</span>${item.tags.reserve}</div>`;
+            tagsHtml += `<div class="text-[11px] bg-slate-900/90 p-2 rounded-lg border border-slate-700/60 text-slate-300 whitespace-pre-line"><span class="font-bold text-sky-400">📌 重要備忘/必逛提醒：\n</span>${item.tags.reserve}</div>`;
           }
         }
 
@@ -757,7 +784,7 @@
               <p class="text-[11px] text-slate-400 truncate mt-0.5">${item.address}</p>
             </div>
 
-            <p class="text-xs text-slate-300 leading-relaxed bg-slate-800/40 p-2.5 rounded-xl border border-slate-800">
+            <p class="text-xs text-slate-300 leading-relaxed bg-slate-800/40 p-2.5 rounded-xl border border-slate-800 whitespace-pre-line">
               ${item.story}
             </p>
 
